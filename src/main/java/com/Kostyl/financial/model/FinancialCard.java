@@ -1,6 +1,7 @@
 package com.Kostyl.financial.model;
 
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,14 +17,24 @@ public class FinancialCard implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private long id;
+
     private String description;
+
     private Long price;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "creation_date")
     private Date creationDate;
+
     @Column(name = "is_paid")
     private boolean isPaid;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Categories category;
+
+    public Categories getCategory() { return category; }
+    public void setCategory(Categories category) { this.category = category; }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;

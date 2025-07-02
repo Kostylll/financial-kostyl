@@ -2,10 +2,12 @@ package com.Kostyl.financial.mapper;
 
 import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ObjectMapper {
 
     private static Mapper mapper = DozerBeanMapperBuilder.buildDefault();

@@ -1,45 +1,43 @@
 package com.Kostyl.financial.model;
 
 import jakarta.persistence.*;
-
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "categories")
-public class Categories {
+public class Categories implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
-    public long getId() {
-        return id;
-    }
+    public Categories() {}
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Categories(String name, boolean isCustom) {
         this.name = name;
+
     }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Categories that = (Categories) o;
-        return getId() == that.getId() && Objects.equals(getName(), that.getName());
+        if (!(o instanceof Categories)) return false;
+        Categories category = (Categories) o;
+        return Objects.equals(getName(), category.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName());
+        return Objects.hash(getName());
     }
 }
